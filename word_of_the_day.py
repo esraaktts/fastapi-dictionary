@@ -8,6 +8,8 @@ def word_of_the_day(word: str):
         word_list = r.get("word_list")
         word_list = json.loads(word_list)
 
+        word_list = {"banana"}
+
         new_word = {
             "word": word,
             "definition": "This is the word of the day definition."
