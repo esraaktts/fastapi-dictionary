@@ -1,24 +1,29 @@
 import redis
 import json
+import random
 
 def word_of_the_day(word: str):
     try:
         r = redis.Redis(host='localhost', port=6379, decode_responses=True)
-        word = r.get("word_of_the_day") #redisten gelen kelime
-        word_list = r.get("word_list")
+        word_list= [
+            "resilient", "serendipity", "ephemeral", "ubiquitous", 
+            "mellifluous", "serene", "eloquent", "profound"
+        ]
         word_list = json.loads(word_list)
-
-        word_list = {"banana"}
-
-        new_word = {
-            "word": word,
-            "definition": "This is the word of the day definition."
-        }
-
+        word = r.get("word_of_the_day")
         if word:
-            new_word = json.loads(word)
-        else:   
+            word_redis = json.loads(word)
+            return word_redis
+
+        else:
+            random_word = random.choice(word_list)
+            new_word = {
+                "word": random_word,
+
+            }
+
             r.set("word_of_the_day", json.dumps(new_word),ex=86400)
+            return new_word
 
     except Exception as e:
         print("Please check the Redis server connection and ensure it is running.")
