@@ -1,0 +1,42 @@
+[
+    {
+        "word": "resilient",
+        "meaning": "Able to recover quickly from difficulties; tough and flexible.",
+        "tags": ["adjective"]
+    },
+    {
+        "word": "serendipity",
+        "meaning": "The occurrence of fortunate events by chance.",
+        "tags": ["noun"]
+    },
+    {
+        "word": "ephemeral",
+        "meaning": "Lasting for a very short time.",
+        "tags": ["adjective"]
+    },
+    {
+        "word": "ubiquitous",
+        "meaning": "Present, appearing, or found everywhere.",
+        "tags": ["adjective",]
+    },
+    {
+        "word": "mellifluous",
+        "meaning": "Pleasant to hear; sweet and smooth in sound.",
+        "tags": ["adjective"]
+    },
+    {
+        "word": "serene",
+        "meaning": "Calm, peaceful, and untroubled.",
+        "tags": ["adjective"]
+    },
+    {
+        "word": "eloquent",
+        "meaning": "Fluent or persuasive in speaking or writing.",
+        "tags": ["adjective"]
+    },
+    {
+        "word": "profound",
+        "meaning": "Very deep or meaningful; showing great insight.",
+        "tags": ["adjective"]
+    }
+]
