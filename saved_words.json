@@ -5,38 +5,62 @@
         "tags": ["adjective"]
     },
     {
-        "word": "serendipity",
+        "word": "soft",
+        "meaning": "Easy to press, not hard or firm.",
+        "tags": ["adjective"]
+    },
+    {
+        "word": "bright",
+        "meaning": "Giving off a lot of light.",
+        "tags": ["adjective"]
+    },
+    {   "word": "serendipity",
         "meaning": "The occurrence of fortunate events by chance.",
         "tags": ["noun"]
     },
     {
-        "word": "ephemeral",
-        "meaning": "Lasting for a very short time.",
+        "word": "brief",
+        "meaning": "Short in time, duration, or length.",
         "tags": ["adjective"]
     },
     {
-        "word": "ubiquitous",
-        "meaning": "Present, appearing, or found everywhere.",
+        "word": "complex",
+        "meaning": "Made of many connected parts; not simple.",
         "tags": ["adjective"]
     },
     {
-        "word": "mellifluous",
-        "meaning": "Pleasant to hear; sweet and smooth in sound.",
+        "word": "warm",
+        "meaning": "Having a comfortably high temperature.",
         "tags": ["adjective"]
     },
     {
-        "word": "serene",
-        "meaning": "Calm, peaceful, and untroubled.",
+        "word": "divide",
+        "meaning": "To separate into parts or groups.",
+        "tags": ["verb"]
+    },
+    {
+        "word": "eager",
+        "meaning": "Wanting very much to do or have something.",
         "tags": ["adjective"]
     },
     {
-        "word": "eloquent",
-        "meaning": "Fluent or persuasive in speaking or writing.",
-        "tags": ["adjective"]
+    "word": "notice",
+    "meaning": "To become aware of something or someone.",
+    "tags": ["verb", "noun"]
     },
     {
-        "word": "profound",
-        "meaning": "Very deep or meaningful; showing great insight.",
-        "tags": ["adjective"]
+        "word": "origin",
+        "meaning": "The beginning or cause of something.",
+        "tags": ["noun"]
+    },
+    {
+        "word": "patient",
+        "meaning": "Able to accept delays or problems without getting angry.",
+        "tags": ["adjective", "noun"]
+    },
+    {
+        "word": "quality",
+        "meaning": "The standard of something as measured against other things.",
+        "tags": ["noun"]
     }
 ]
