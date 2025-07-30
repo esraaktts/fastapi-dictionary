@@ -22,6 +22,7 @@ def word_info(word: str):
                 word="Word Not Found",
                 phonetic="Phonetic Not Found.",
                 meanings=["Meanings Not Found."],
+                tags = ["Tags Not Found."],
                 title="Definition Not Found.",
                 message="We couldn't locate a definition for the word you entered.",
                 resolution="Please try searching a different word."
@@ -52,6 +53,7 @@ def word_info(word: str):
             word=word,
             phonetic=phonetic,
             meanings=meanings,
+            tags = tags,
             title= None,
             message= None,
             resolution= None
@@ -64,6 +66,7 @@ def word_info(word: str):
             word =None,
             phonetic = None,
             meanings = None,
+            tags = None
             title="Network Error",
             message="Unable to connect to the dictionary API service.",
             resolution="Please check your internet connection or try again later."

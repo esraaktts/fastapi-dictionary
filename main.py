@@ -21,5 +21,5 @@ def trending(word: str):
 
 @app.get("/app/word_of_the_day/{word}")
 def word_of_the_day(word: str):
-    res = word_of_the_day(word)
+    res = word_of_the_day()
     return res

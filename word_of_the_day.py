@@ -6,12 +6,12 @@ def word_of_the_day(word: str):
     try:
         r = redis.Redis(host='localhost', port=6379, decode_responses=True)
 
-        with open('saved_words.json', 'r') as r:
-            word_list = json.load(r)
-        word = r.get("word_of_the_day")
+        with open('saved_words.json', 'r') as file:
+            word_list = json.load(file)
+        selected_word = r.get("word_of_the_day")
 
-        if word:
-            word_redis = json.loads(word)
+        if selected_word:
+            word_redis = json.loads(selected_word)
             return word_redis
 
         else:
