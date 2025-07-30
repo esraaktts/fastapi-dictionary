@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from word_info import word_info
+from word_of_the_day import word_of_the_day
+from trending_words import trending_words
 
 app = FastAPI()
 
@@ -7,8 +9,17 @@ app = FastAPI()
 def health():
     return {"system":"success"}
 
-
 @app.get("/app/words/{word}")
 def get_word(word: str):
     res = word_info(word)
+    return res
+
+@app.get("/app/trending/{word}")
+def trending(word: str):
+    res = trending_words(word)
+    return res
+
+@app.get("/app/word_of_the_day/{word}")
+def word_of_the_day(word: str):
+    res = word_of_the_day(word)
     return res
