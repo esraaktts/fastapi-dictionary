@@ -4,9 +4,9 @@ import json
 def trending_words(word: str):
     try:
         r = redis.Redis(host='localhost', port=6379, decode_responses=True)
-        trending_string	 = r.get("trending")
+        trending_string = r.get("trending")
 
-        if trending_string	:
+        if trending_string:
             counts = json.loads(trending_string)
         else:
             counts = {}
@@ -22,7 +22,7 @@ def trending_words(word: str):
     
         print("Trending words (top 10):")
         for word, count in trending_words:
-            print (f"{word}: {count}")
+            print(f"{word}: {count}")
 
         return {"word" : word, "trending": dict(trending_words)} 
 

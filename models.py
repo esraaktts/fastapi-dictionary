@@ -8,4 +8,4 @@ class WordResponse(BaseModel):
     tags :Optional [List[Dict]] = None
     title: Optional[str] = None
     message: Optional[str] = None
-    resolution: Optional[str] 
+    resolution: Optional[str] = None

@@ -1,23 +1,16 @@
 import requests
 from models import WordResponse
-import redis
 import json
 
 def word_info(word: str):
-    
-    r = redis.Redis(host='localhost', port=6379, decode_responses=True)
-    
-    cached_word = r.get(word)
-    if cached_word:
-        return WordResponse(**json.loads(cached_word))
 
     url = f"https://api.dictionaryapi.dev/api/v2/entries/en/{word}"
 
     try:
         resp = requests.get(url)
-        veri = resp.json()
+        data = resp.json()
 
-        if not isinstance(veri, list):
+        if not isinstance(data, list):
             return WordResponse(
                 word="Word Not Found",
                 phonetic="Phonetic Not Found.",
@@ -34,31 +27,35 @@ def word_info(word: str):
                     return phtic["text"]
             return "Phonetic Not Found."
 
-        phonetic = find_phonetic(veri[0].get("phonetics", []))
+        phonetic = find_phonetic(data[0].get("phonetics", []))
 
         def find_meanings(data):
-            meanings = []
-            for meaning in data.get('meanings',[]):
+            tags = {}
+            for meaning in data.get('meanings', []):
+                tag = meaning.get("partOfSpeech", "mean")
+                meanings = []
                 for defn in meaning.get('definitions', []):
                     definition = defn.get('definition')
                     if definition:
                         meanings.append(definition)
-            if not meanings:
-                meanings.append("Meanings Not Found.")
-            return meanings
-        
-        meanings = find_meanings(veri[0])
+                    else:
+                        meanings.append("Meanings Not Found.")
+                tags[tag] = meanings
+            meanings = [{tag: definitions} for tag, definitions in tags.items()]
+            return meanings, list(tags.keys())
+
+        meanings, tags = find_meanings(data[0])
 
         new_response = WordResponse(
             word=word,
             phonetic=phonetic,
             meanings=meanings,
-            tags = tags,
-            title= None,
-            message= None,
-            resolution= None
+            tags=tags,
+            title=None,
+            message=None,
+            resolution=None
         )
-        r.set(word,json.dumps(new_response.dict()))
+        
         return new_response
     
     except Exception:
@@ -66,7 +63,7 @@ def word_info(word: str):
             word =None,
             phonetic = None,
             meanings = None,
-            tags = None
+            tags = None,
             title="Network Error",
             message="Unable to connect to the dictionary API service.",
             resolution="Please check your internet connection or try again later."
