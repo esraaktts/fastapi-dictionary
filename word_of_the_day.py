@@ -2,7 +2,7 @@ import redis
 import json
 import random
 
-def word_of_the_day(word: str):
+def word_of_the_day():
     try:
         r = redis.Redis(host='localhost', port=6379, decode_responses=True)
 
@@ -26,6 +26,7 @@ def word_of_the_day(word: str):
             }
 
             r.set("word_of_the_day", json.dumps(new_word),ex=86400)
+            print("New word of the day set in Redis.")               
             return new_word
 
     except Exception:
