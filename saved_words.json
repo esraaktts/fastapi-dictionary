@@ -44,9 +44,9 @@
         "tags": ["adjective"]
     },
     {
-    "word": "notice",
-    "meaning": "To become aware of something or someone.",
-    "tags": ["verb", "noun"]
+        "word": "notice",
+        "meaning": "To become aware of something or someone.",
+        "tags": ["verb", "noun"]
     },
     {
         "word": "origin",
