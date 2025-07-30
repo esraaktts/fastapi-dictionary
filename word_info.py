@@ -19,43 +19,44 @@ def word_info(word: str):
                 title="Definition Not Found.",
                 message="We couldn't locate a definition for the word you entered.",
                 resolution="Please try searching a different word."
-            )      
-                
-        def find_phonetic(data):
-            for phtic in data:
-                if "text" in phtic:
-                    return phtic["text"]
-            return "Phonetic Not Found."
+            ) 
 
-        phonetic = find_phonetic(data[0].get("phonetics", []))
+        else:     
+            def find_phonetic(data):
+                for phtic in data:
+                    if "text" in phtic:
+                        return phtic["text"]
+                return "Phonetic Not Found."
 
-        def find_meanings(data):
-            tags = {}
-            for meaning in data.get('meanings', []):
-                tag = meaning.get("partOfSpeech", "mean")
-                meanings = []
-                for defn in meaning.get('definitions', []):
-                    definition = defn.get('definition')
-                    if definition:
-                        meanings.append(definition)
-                    else:
-                        meanings.append("Meanings Not Found.")
-                tags[tag] = meanings
-            meanings = [{tag: defns} for tag, defns in tags.items()]
-            return meanings, list(tags.keys())
+            phonetic = find_phonetic(data[0].get("phonetics", []))
 
-        meanings, tags = find_meanings(data[0])
+            def find_meanings(data):
+                tags = {}
+                for meaning in data.get('meanings', []):
+                    tag = meaning.get("partOfSpeech", "mean")
+                    meanings = []
+                    for defn in meaning.get('definitions', []):
+                        definition = defn.get('definition')
+                        if definition:
+                            meanings.append(definition)
+                        else:
+                            meanings.append("Meanings Not Found.")
+                    tags[tag] = meanings
+                meanings = [{tag: defns} for tag, defns in tags.items()]
+                return meanings, list(tags.keys())
 
-        return WordResponse(
-            word=word,
-            phonetic=phonetic,
-            meanings=meanings,
-            tags=tags,
-            title=None,
-            message=None,
-            resolution=None
-        )
-    
+            meanings, tags = find_meanings(data[0])
+
+            return WordResponse(
+                word=word,
+                phonetic=phonetic,
+                meanings=meanings,
+                tags=tags,
+                title=None,
+                message=None,
+                resolution=None
+            )
+        
     except Exception:
         return WordResponse(
             word =None,

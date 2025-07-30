@@ -22,3 +22,12 @@ def trending(word: str):
 @app.get("/app/word_of_the_day")
 def get_word_of_the_day():
     return word_of_the_day()
+
+@app.get("/app/word/word=<kelime>")
+def
+
+@app.get("/app/history_limit")
+def
+
+@app.get("/app/history/export_format")
+def
