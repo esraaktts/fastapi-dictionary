@@ -41,12 +41,12 @@ def word_info(word: str):
                     else:
                         meanings.append("Meanings Not Found.")
                 tags[tag] = meanings
-            meanings = [{tag: definitions} for tag, definitions in tags.items()]
+            meanings = [{tag: defns} for tag, defns in tags.items()]
             return meanings, list(tags.keys())
 
         meanings, tags = find_meanings(data[0])
 
-        new_response = WordResponse(
+        return WordResponse(
             word=word,
             phonetic=phonetic,
             meanings=meanings,
@@ -55,8 +55,6 @@ def word_info(word: str):
             message=None,
             resolution=None
         )
-        
-        return new_response
     
     except Exception:
         return WordResponse(
