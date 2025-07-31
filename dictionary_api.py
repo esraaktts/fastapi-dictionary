@@ -6,7 +6,7 @@ import json
 def word_info(word: str):
     r = redis.Redis(host='localhost', port=6379, decode_responses=True)
 
-    cached_word = r.get(word)
+    cached_word = r.get(f"word:{word}")
     if cached_word:
         return WordResponse(**json.loads(cached_word))
 
@@ -26,7 +26,7 @@ def word_info(word: str):
                 message="We couldn't locate a definition for the word you entered.",
                 resolution="Please try searching a different word."
             )
-            r.set(word, json.dumps(new_response.dict()))
+            r.set(f"word:{word}", json.dumps(new_response.dict()))
             return new_response
 
         def find_phonetic(data):
@@ -63,7 +63,7 @@ def word_info(word: str):
             resolution=None
         )
 
-        r.set(word, json.dumps(new_response.dict()))
+        r.set(f"word:{word}", json.dumps(new_response.dict()))
         return new_response
 
     except Exception:

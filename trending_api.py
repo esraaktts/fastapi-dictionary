@@ -22,9 +22,9 @@ def trending_words(word: str):
     
         print("Trending words (top 10):")
         for word, count in trending_words:
-            print(f"{word}: {count}")
+            print(f"{word}:{count}")
 
         return {"Trending Words:": dict(trending_words)} 
 
-    except Exception as e:
+    except Exception:
         print("Please check the Redis server connection and ensure it is running.")

@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request
-from word_info import word_info
-from word_of_the_day import word_of_the_day
-from trending_words import trending_words
+from dictionary_api import word_info
+from word_day_api import word_of_the_day
+from trending_api import trending_words
 
 app = FastAPI()
 
