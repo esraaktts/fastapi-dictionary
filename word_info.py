@@ -6,38 +6,21 @@ import json
 def word_info(word: str):
     r = redis.Redis(host='localhost', port=6379, decode_responses=True)
 
+    cached_word = r.get(word)
+    if cached_word:
+        return WordResponse(**json.loads(cached_word))
+
+    url = f"https://api.dictionaryapi.dev/api/v2/entries/en/{word}"
+
     try:
-        # Redis cache kontrolü
-        cached = r.get(word)
-        if cached:
-            print(f"Cache hit for word: {word}")
-            data = json.loads(cached)
-
-            # Buraya eklendi: meanings içindeki stringleri dict'e çevir
-            if "meanings" in data:
-                corrected_meanings = []
-                for item in data["meanings"]:
-                    if isinstance(item, str):
-                        try:
-                            corrected_meanings.append(json.loads(item))
-                        except:
-                            corrected_meanings.append(item)
-                    else:
-                        corrected_meanings.append(item)
-                data["meanings"] = corrected_meanings
-
-            return WordResponse(**data)
-
-        # Cache yoksa API çağrısı
-        url = f"https://api.dictionaryapi.dev/api/v2/entries/en/{word}"
         resp = requests.get(url)
         data = resp.json()
 
         if not isinstance(data, list):
             new_response = WordResponse(
-                word="Word Not Found",
+                word=word,
                 phonetic="Phonetic Not Found.",
-                meanings=[{"unknown": ["Meanings Not Found."]}],
+                meanings=["Meanings Not Found."],
                 tags = ["Tags Not Found."],
                 title="Definition Not Found.",
                 message="We couldn't locate a definition for the word you entered.",
@@ -51,8 +34,6 @@ def word_info(word: str):
                 if "text" in phtic:
                     return phtic["text"]
             return "Phonetic Not Found."
-
-        phonetic = find_phonetic(data[0].get("phonetics", []))
 
         def find_meanings(data):
             tags = {}
@@ -70,8 +51,9 @@ def word_info(word: str):
             return meanings, list(tags.keys())
 
         meanings, tags = find_meanings(data[0])
+        phonetic = find_phonetic(data[0].get("phonetics", []))
 
-        response = WordResponse(
+        new_response = WordResponse(
             word=word,
             phonetic=phonetic,
             meanings=meanings,
@@ -81,13 +63,10 @@ def word_info(word: str):
             resolution=None
         )
 
-        # Sonucu Redis cache'e kaydet
-        r.set(word, json.dumps(response.dict()))
+        r.set(word, json.dumps(new_response.dict()))
+        return new_response
 
-        return response
-
-    except Exception as e:
-        print(f"Exception in word_info: {e}")
+    except Exception:
         return WordResponse(
             word=None,
             phonetic=None,
