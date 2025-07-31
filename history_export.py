@@ -1,8 +1,14 @@
 import redis
+from fastapi import Request
 
-def get_user_ip(user_ip: Request):
+def get_user_ip(ip: Request):
     
-    ip = user_ip.client.host
+    user_ip = ip.headers.get("X-Forwarded-For")
+
+    if user_ip:
+        ip = user_ip.split(",")[0].strip()
+    else:
+        ip = user_ip.client.host
     return ip
 
 def get_user_history(user_history: 
