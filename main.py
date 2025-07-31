@@ -22,3 +22,11 @@ def trending(word: str):
 @app.get("/app/word_of_the_day")
 def get_word_of_the_day():
     return word_of_the_day()
+
+@app.get("/app/user_id")
+def get_user_id(reqst: Request):
+  return get_user_id
+
+@app.get("/app/user_history")
+def get_history(reqst: Request):
+    return get_history

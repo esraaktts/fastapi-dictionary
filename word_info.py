@@ -20,7 +20,7 @@ def word_info(word: str):
             new_response = WordResponse(
                 word=word,
                 phonetic="Phonetic Not Found.",
-                meanings=["Meanings Not Found."],
+                meanings=[{"unknown": ["Meanings Not Found."]}],
                 tags = ["Tags Not Found."],
                 title="Definition Not Found.",
                 message="We couldn't locate a definition for the word you entered.",
@@ -68,7 +68,7 @@ def word_info(word: str):
 
     except Exception:
         return WordResponse(
-            word=None,
+            word=word,
             phonetic=None,
             meanings=None,
             tags=None,
