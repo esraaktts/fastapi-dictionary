@@ -18,7 +18,7 @@ def word_info(word: str):
 
         if not isinstance(data, list):
             new_response = WordResponse(
-                word=word,
+                word="Word Not Found",
                 phonetic="Phonetic Not Found.",
                 meanings=[{"unknown": ["Meanings Not Found."]}],
                 tags = ["Tags Not Found."],

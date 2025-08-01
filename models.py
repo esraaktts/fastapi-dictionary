@@ -11,6 +11,15 @@ class WordResponse(BaseModel):
     message: Optional[str] = None
     resolution: Optional[str] = None
 
+class DailyResponse(BaseModel):
+    word: Optional[str] = None
+    definition: Optional[str] = None
+    tags: Optional[List[str]] = None
+    title: Optional[str] = None
+    message: Optional[str] = None
+    resolution: Optional[str] = None
+
+
 class HistoryItem(BaseModel):
     word: str
     timestamp: str
